@@ -1,0 +1,80 @@
+0. Mengarahkan cmd ke folder tujuan 
+F-> XAMPP -> cd mysql --> cd bin --> mysql -u root -p--> use myshop 
+
+1. Membuat dan mengarahkan database 
+A. create database myshop;
+B. use myshop;
+
+2. Membuat Table
+
+A. Users 
+create table users (
+id integer primary key auto_increment,
+name varchar(255), 
+email varchar(255) unique, 
+password varchar(255) );
+
+B. Items 
+create table items (
+id integer primary key auto_increment,
+name varchar(255), 
+desciption varchar(255), 
+price integer,
+stock integer,
+category_id integer ); 
+
+B.1 Penambahan foreign key pada category_id 
+alter table items add foreign key (category_id) references categories(id) ; 
+
+ 
+
+
+     
+
+C. Categories
+create table categories (
+id integer primary key auto_increment,
+name varchar(255));    
+
+
+3. Memasukkan data pada table
+A. Users 
+insert into users values ('', 'John Doe', 'john@doe.com', 'john123');
+insert into users values ('', 'Jane Doe', 'jane@doe.com', 'jenita123');
+
+B. Categories 
+insert into categories values ('', 'gadget');
+insert into categories values ('', 'cloth');
+insert into categories values ('', 'men');
+insert into categories values ('', 'women'); 
+insert into categories values ('', 'branded');
+
+C. Items 
+insert into items values ('', 'Sumsang b50', 'hape keren dari merek sumsang', '4000000','100','1'); 
+insert into items values ('', 'Uniklooh', 'baju keren dari brand ternama', '500000','50','2');
+insert into items values ('', 'IMHO Watch', 'jam tangan anak yang jujur banget', '2000000','10','1');
+
+
+4. Mengambil data dari database 
+
+a. Mengambil data users
+select id,name,email from users;
+
+b. Mengambil data items
+A. select * from items where price > 1000000;
+B. select * from items where name like '%watch%';
+
+C. Menampilkan data items join dengan kategori
+select items.name, items.description, items.price, 
+items.stock, items.category_id, 
+categories.name as kategori from items 
+innerjoin categories on category_id = categories.id;
+
+5. Mengubah Data dari Database
+update items set price = '2500000' where id = 1;
+
+
+
+ 
+
+
